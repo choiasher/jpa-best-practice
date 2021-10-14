@@ -7,17 +7,16 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity(name = "users")
-public class User {
+@Entity
+public class Comment {
 
     @Id
-    @Column
     @GeneratedValue
     private Long id;
 
     @Column
-    private String userName;
+    private String content;
 
-    @Column
-    private String password;
+    @ManyToOne
+    private Post post;
 }

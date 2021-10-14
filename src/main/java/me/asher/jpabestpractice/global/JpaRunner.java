@@ -1,6 +1,7 @@
 package me.asher.jpabestpractice.global;
 
-import me.asher.jpabestpractice.domain.User;
+import me.asher.jpabestpractice.domain.Account;
+import me.asher.jpabestpractice.domain.Study;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -19,13 +20,18 @@ public class JpaRunner implements ApplicationRunner {
     @Transactional
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        User user = new User();
-        user.setUserName("choi");
-        user.setPassword("pass");
+        Account account = new Account();
+        account.setUserName("choi");
+        account.setPassword("pass");
         //entityManager.persist(account);
 
+        Study study = new Study();
+        study.setName("Spring data JPA");
+        account.addStudy(study);
+
         Session session = entityManager.unwrap(Session.class);
-        session.save(user);
+        session.save(account);
+        session.save(study);
 
 
     }
