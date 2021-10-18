@@ -1,6 +1,8 @@
 package me.asher.jpabestpractice.global;
 
 import me.asher.jpabestpractice.domain.Account;
+import me.asher.jpabestpractice.domain.Post;
+import me.asher.jpabestpractice.domain.PostRepository;
 import me.asher.jpabestpractice.domain.Study;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +17,16 @@ import javax.persistence.EntityManager;
 public class JpaRunner implements ApplicationRunner {
 
     @Autowired
-    private EntityManager entityManager;
+    private PostRepository postRepository;
 
     @Transactional
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Account account = new Account();
-        account.setUserName("choi");
-        account.setPassword("pass");
-        //entityManager.persist(account);
+        Post post = new Post();
+        post.setTitle("hello");
+        post.setContent("bla bla~");
 
-        Study study = new Study();
-        study.setName("Spring data JPA");
-        account.addStudy(study);
-
-        Session session = entityManager.unwrap(Session.class);
-        session.save(account);
-        session.save(study);
+        postRepository.save(post);
 
 
     }

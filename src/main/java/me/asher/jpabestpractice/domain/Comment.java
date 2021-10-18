@@ -2,9 +2,11 @@ package me.asher.jpabestpractice.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
+@ToString(exclude = "post")
 @Getter
 @Setter
 @Entity
@@ -17,6 +19,6 @@ public class Comment {
     @Column
     private String content;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
 }
