@@ -31,9 +31,8 @@ public class PostController {
     }
 
     @GetMapping("/api/v2/posts")
-    public ResponseEntity<PagedModel<EntityModel<Post>>> getPostsV2(Pageable pageable) {
+    public PagedModel<EntityModel<Post>> getPostsV2(Pageable pageable) {
         Page<Post> customers = posts.findAll(pageable);
-        PagedModel<EntityModel<Post>> entityModels = assembler.toModel(customers);
-        return ResponseEntity.ok(entityModels);
+        return assembler.toModel(customers);
     }
 }
